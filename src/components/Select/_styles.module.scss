@@ -1,0 +1,49 @@
+.selectWrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: flex-start;
+    row-gap: 8px;
+
+    .selectButton {
+        background-color: #232323;
+        color: #fff;
+        padding: 12px 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+    }
+
+    .selectLabel {
+        color: rgb(176, 176, 176);
+        font-size: 12px;
+    }
+}
+
+.drawerWrapper {
+    position: absolute;
+    background-color: #232323;
+    display: none;
+    top: 102%;
+    width: 100%;
+
+    &.active {
+        display: block;
+    }
+}
+
+.drawerItem {
+    color: rgb(176, 176, 176);
+    padding: 8px 0;
+    border-bottom: 1px solid rgb(91, 91, 91);
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+        background-color: #343434;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+}

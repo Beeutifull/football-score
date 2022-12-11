@@ -1,6 +1,10 @@
 import { useState, useRef } from "react";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { getSelectedText } from "../../utils/utils";
+import { ChevronIcon } from "../../assets/icons/index";
+import Button from "../Button/Button";
+
+import styles from "./_styles.module.scss";
 
 const Select = ({
     label,
@@ -26,30 +30,38 @@ const Select = ({
     };
 
     return (
-        <div className="select-wrapper" ref={selectRef}>
-            {label && <label>{label}</label>}
-            <button
+        <div className={styles.selectWrapper} ref={selectRef}>
+            {label && <label className={styles.selectLabel}>{label}</label>}
+            <Button
                 type="button"
-                className="select-button"
+                className={styles.selectButton}
                 onClick={() => setIsActive(!isActive)}
+                icon={<ChevronIcon fill="#fff" />}
+                minWidth="170px"
             >
                 {buttonText}
-            </button>
-            {isActive &&
-                options &&
-                options.map((item) => (
-                    <div
-                        className="select-drawer"
-                        key={item.value}
-                        onClick={() => {
-                            if (handleOptionClick)
-                                handleOptionClick(item.value);
-                            setIsActive(false);
-                        }}
-                    >
-                        {item.text}
-                    </div>
-                ))}
+            </Button>
+            <div
+                className={`${styles.drawerWrapper} ${
+                    isActive ? styles.active : ""
+                }`}
+            >
+                {isActive &&
+                    options &&
+                    options.map((item) => (
+                        <div
+                            className={styles.drawerItem}
+                            key={item.value}
+                            onClick={() => {
+                                if (handleOptionClick)
+                                    handleOptionClick(item.value);
+                                setIsActive(false);
+                            }}
+                        >
+                            {item.text}
+                        </div>
+                    ))}
+            </div>
         </div>
     );
 };

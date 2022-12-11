@@ -1,0 +1,26 @@
+.button {
+    background-color: #232323;
+    color: #fff;
+    padding: 12px 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:hover {
+        background-color: #2f2f2f;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: #2f2f2f;
+    }
+
+    .buttonIcon {
+        margin-left: 8px;
+    }
+}

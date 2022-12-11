@@ -13,6 +13,9 @@ function App() {
     const [liveGames, setLiveGames] = useState([]);
     const [finishedGames, setFinishedGames] = useState([]);
 
+    const isStartGameButtonDisabled =
+        awayTeamName === "" || homeTeamName === "" ? true : false;
+
     const handleGameStart = () => {
         const game = {
             id: uuidv4(),
@@ -63,7 +66,12 @@ function App() {
                     options={AWAY_TEAM}
                     placeholder="Select Away Team"
                 />
-                <Button onClick={handleGameStart}>Start Game</Button>
+                <Button
+                    disabled={isStartGameButtonDisabled}
+                    onClick={handleGameStart}
+                >
+                    Start Game
+                </Button>
             </div>
             <ScoreBoard scoreboardTitle="Live Scoreboard" games={liveGames} />
             <ScoreBoard scoreboardTitle="Summary" games={finishedGames} />
