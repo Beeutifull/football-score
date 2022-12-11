@@ -31,3 +31,10 @@ export const intervalFunction = (games, setLiveGames, setFinishedGames) => {
 export const increaseTime = (games) => {
     return games.map((game) => ({ ...game, gameTime: game.gameTime + 5 }));
 };
+
+export const getSelectedText = (options, selected) => {
+    if (options && selected) {
+        const item = options.find((item) => item.value === selected);
+        return item.text;
+    }
+};

@@ -3,7 +3,23 @@ import { v4 as uuidv4 } from "uuid";
 import { sortGamesByScore, intervalFunction } from "./utils/utils";
 
 import "./App.css";
-import { Button, InputField, ScoreBoard } from "./components";
+import { Button, InputField, ScoreBoard, Select } from "./components";
+
+const OPTIONS = [
+    { value: "giedrius", text: "Giedrius" },
+    { value: "gytis", text: "Gytis" },
+    { value: "michal", text: "Michal" },
+    { value: "viktor", text: "Viktor" },
+    { value: "nemanja", text: "Nemanja" },
+];
+
+const OPTIONS2 = [
+    { value: "giedriusaaa", text: "Giedriusaaa" },
+    { value: "gytisaaa", text: "Gytisaaa" },
+    { value: "michalaaa", text: "Michalaaa" },
+    { value: "viktoraaa", text: "Viktoraaa" },
+    { value: "nemanjaaaa", text: "Nemanjaaaa" },
+];
 
 function App() {
     //useReducer here
@@ -48,15 +64,19 @@ function App() {
         <div className="App">
             <h2>Football Fans</h2>
             <div className="inputs-wrapper">
-                <InputField
-                    value={homeTeamName}
-                    onChange={(e) => setHomeTeamName(e.target.value)}
-                    isHomeTeam
+                <Select
+                    label="Home Team"
+                    selected={homeTeamName}
+                    onChange={setHomeTeamName}
+                    options={OPTIONS}
+                    placeholder="Select Home Team"
                 />
-                <InputField
-                    value={awayTeamName}
-                    onChange={(e) => setAwayTeamName(e.target.value)}
-                    isHomeTeam
+                <Select
+                    label="Away Team"
+                    selected={awayTeamName}
+                    onChange={setAwayTeamName}
+                    options={OPTIONS2}
+                    placeholder="Select Away Team"
                 />
                 <Button onClick={handleGameStart}>Start Game</Button>
             </div>
