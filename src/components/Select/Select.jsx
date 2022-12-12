@@ -38,6 +38,7 @@ const Select = ({
                 onClick={() => setIsActive(!isActive)}
                 icon={<ChevronIcon fill="#fff" />}
                 minWidth="170px"
+                disabled={options.length <= 0}
             >
                 {buttonText}
             </Button>

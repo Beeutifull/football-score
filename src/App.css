@@ -37,6 +37,11 @@
     align-items: flex-end;
 }
 
+h2 {
+    margin-top: 0;
+    padding-top: 32px;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

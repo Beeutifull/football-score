@@ -12,6 +12,8 @@ function App() {
     const [awayTeamName, setAwayTeamName] = useState("");
     const [liveGames, setLiveGames] = useState([]);
     const [finishedGames, setFinishedGames] = useState([]);
+    const [homeTeamOptions, setHomeTeamOptions] = useState(HOME_TEAM);
+    const [awayTeamOptions, setAwayTeamOptions] = useState(AWAY_TEAM);
 
     const isStartGameButtonDisabled =
         awayTeamName === "" || homeTeamName === "" ? true : false;
@@ -19,14 +21,24 @@ function App() {
     const handleGameStart = () => {
         const game = {
             id: uuidv4(),
-            homeTeam: homeTeamName,
-            awayTeam: awayTeamName,
+            homeTeam: homeTeamOptions.find((el) => el.value === homeTeamName)
+                .text,
+            awayTeam: awayTeamOptions.find((el) => el.value === awayTeamName)
+                .text,
             homeTeamScore: 0,
             awayTeamScore: 0,
             gameTime: 0,
         };
+        console.log("text");
         setHomeTeamName("");
         setAwayTeamName("");
+        console.log("away team name", awayTeamName);
+        setAwayTeamOptions(
+            awayTeamOptions.filter((team) => team.value !== awayTeamName)
+        );
+        setHomeTeamOptions(
+            homeTeamOptions.filter((team) => team.value !== homeTeamName)
+        );
         setLiveGames((prevState) => [...prevState, game]);
     };
 
@@ -39,7 +51,8 @@ function App() {
                     setFinishedGames,
                     finishedGames
                 ),
-            1000
+            1000 * 60
+            // change this interval and game will last longer or shorter
         );
         return () => clearInterval(interval);
     }, [finishedGames, liveGames]);
@@ -56,14 +69,14 @@ function App() {
                     label="Home Team"
                     selected={homeTeamName}
                     onChange={setHomeTeamName}
-                    options={HOME_TEAM}
+                    options={homeTeamOptions}
                     placeholder="Select Home Team"
                 />
                 <Select
                     label="Away Team"
                     selected={awayTeamName}
                     onChange={setAwayTeamName}
-                    options={AWAY_TEAM}
+                    options={awayTeamOptions}
                     placeholder="Select Away Team"
                 />
                 <Button
@@ -74,7 +87,7 @@ function App() {
                 </Button>
             </div>
             <ScoreBoard scoreboardTitle="Live Scoreboard" games={liveGames} />
-            <ScoreBoard scoreboardTitle="Summary" games={finishedGames} />
+            <ScoreBoard scoreboardTitle="Games Summary" games={finishedGames} />
         </div>
     );
 }
