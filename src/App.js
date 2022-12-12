@@ -29,10 +29,8 @@ function App() {
             awayTeamScore: 0,
             gameTime: 0,
         };
-        console.log("text");
         setHomeTeamName("");
         setAwayTeamName("");
-        console.log("away team name", awayTeamName);
         setAwayTeamOptions(
             awayTeamOptions.filter((team) => team.value !== awayTeamName)
         );
